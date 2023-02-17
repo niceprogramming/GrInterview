@@ -1,1 +1,6 @@
-﻿Console.WriteLine("Hello, World!");
+﻿using CliFx;
+
+return await new CliApplicationBuilder()
+    .AddCommandsFromThisAssembly()
+    .Build()
+    .RunAsync();
