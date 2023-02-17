@@ -12,9 +12,9 @@ namespace GrInterview.Common.Models
         public string FirstName { get; }
         public string Email { get; }
         public string FavoriteColor { get; }
-        public string DateOfBirth { get; }
+        public DateTime DateOfBirth { get; }
 
-        public User(string lastName, string firstName, string email, string favoriteColor, string dateOfBirth)
+        public User(string lastName, string firstName, string email, string favoriteColor, DateTime dateOfBirth)
         {
             LastName = lastName;
             FirstName = firstName;
