@@ -10,7 +10,7 @@ namespace GrInterview.Common.Parsers
 {
     public class UserParser : IParser<User>
     {
-        public Task<User> Parse(StreamReader reader)
+        public Task<IEnumerable<User>> Parse(StreamReader reader)
         {
             throw new NotImplementedException();
         }

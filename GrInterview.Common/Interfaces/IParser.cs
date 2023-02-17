@@ -8,6 +8,6 @@ namespace GrInterview.Common.Interfaces
 {
     public interface IParser<T>
     {
-        Task<T> Parse(StreamReader reader);
+        Task<IEnumerable<T>> Parse(StreamReader reader);
     }
 }
