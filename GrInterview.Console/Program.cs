@@ -1,6 +1,7 @@
 ﻿using CliFx;
+using GrInterview.Console.Commands;
 
 return await new CliApplicationBuilder()
-    .AddCommandsFromThisAssembly()
+    .AddCommand<ParseCommand>()
     .Build()
     .RunAsync();
