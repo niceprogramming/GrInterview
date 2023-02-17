@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrInterview.Console", "GrIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrInterview.Common", "GrInterview.Common\GrInterview.Common.csproj", "{56DC7C99-FDCB-4EAC-BE2B-9EEA7838ED88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrInterview.Tests", "GrInterview.Tests\GrInterview.Tests.csproj", "{88753133-60D2-4951-96A9-3C55FC22A85F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{56DC7C99-FDCB-4EAC-BE2B-9EEA7838ED88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56DC7C99-FDCB-4EAC-BE2B-9EEA7838ED88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56DC7C99-FDCB-4EAC-BE2B-9EEA7838ED88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88753133-60D2-4951-96A9-3C55FC22A85F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88753133-60D2-4951-96A9-3C55FC22A85F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88753133-60D2-4951-96A9-3C55FC22A85F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88753133-60D2-4951-96A9-3C55FC22A85F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
