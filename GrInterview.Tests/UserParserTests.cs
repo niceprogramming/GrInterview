@@ -43,6 +43,25 @@ namespace GrInterview.Tests
         }
 
         [Theory]
+        [InlineData("./TestFiles/SingleLineCsv.txt")]
+        [InlineData("./TestFiles/SingleLinePipe.txt")]
+        [InlineData("./TestFiles/SingleLineSpaces.txt")]
+        public async Task Parser_works_with_different_delimiters(string filePath)
+        {
+            using var fileStream = File.OpenText(filePath);
+
+            var parser = new UserParser(new[] { ",", "|", " " });
+
+            var expected = new User("User", "Test", "test.user@gmail.com", "brown", new DateTime(1994, 7, 26));
+            
+
+            var result = await parser.Parse(fileStream);
+
+            Assert.Equivalent(expected, result.FirstOrDefault());
+        }
+
+
+        [Theory]
         [InlineData("./TestFiles/FourHeaderCsv.txt")]
         [InlineData("./TestFiles/SixHeaderCsv.txt")]
         public async Task Parser_throws_exception_if_file_does_not_have_five_columns(string filePath)
