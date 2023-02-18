@@ -1,0 +1,3 @@
+LastName,FirstName,Email,FavoriteColor,DateOfBirth
+
+User,Test,test.user@gmail.com,brown,07/26/1994
