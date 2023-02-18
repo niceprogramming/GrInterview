@@ -1,0 +1,6 @@
+LastName,FirstName,Email,FavoriteColor,DateOfBirth
+Z,Test,test.user@gmail.com,yellow,08/26/1994
+Sam,Test,test.user@gmail.com,brown,07/26/1994
+Sadie,Test,test.user@gmail.com,orange,09/26/1994
+Sid,Test,test.user@gmail.com,green,01/26/1994
+Ted,Test,test.user@gmail.com,Apple,04/26/1994
