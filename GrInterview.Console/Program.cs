@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 var services = new ServiceCollection();
 
-services.AddSingleton<IParser<User>, UserParser>();
+services.AddSingleton<IParser<User>>(new UserParser(new []{",","|"," "}));
 
 services.AddTransient<ParseCommand>();
 var serviceProvider = services.BuildServiceProvider();
