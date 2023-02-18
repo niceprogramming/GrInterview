@@ -14,7 +14,7 @@ namespace GrInterview.Tests
     public class ParseCommandTest
     {
         [Fact]
-        public async Task Command_executes_successfully_given_an_existing_file_and_outputs_sorted_data()
+        public async Task Command_outputs_sorted_data_given_an_existing_file()
         {
             using var console = new FakeInMemoryConsole();
             var parser = new UserParser(new[] { ",", "|", " " });
