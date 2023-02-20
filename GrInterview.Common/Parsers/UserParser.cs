@@ -23,10 +23,8 @@ namespace GrInterview.Common.Parsers
             var hasReadHeader = false;
             var delimiter = string.Empty;
             var records = new List<User>();
-            string? line;
-            while ((line = await reader.ReadLineAsync()) != null)
+            while (await reader.ReadLineAsync() is { } line)
             {
-                
                 if (string.IsNullOrWhiteSpace(line))
                 {
                     continue;
