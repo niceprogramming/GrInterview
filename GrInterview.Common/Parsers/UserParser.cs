@@ -18,7 +18,8 @@ namespace GrInterview.Common.Parsers
         {
             _delimiters = delimiters;
         }
-        public async Task<IEnumerable<User>> Parse(TextReader reader)
+
+        public async Task<IEnumerable<User>> Parse(TextReader reader, bool hasHeader = true)
         {
             var hasReadHeader = false;
             var delimiter = string.Empty;
@@ -30,14 +31,16 @@ namespace GrInterview.Common.Parsers
                     continue;
                 }
 
-                if (!hasReadHeader)
+
+                delimiter = line.FindDelimiter(_delimiters);
+                var columnCount = line.Split(delimiter).Length;
+                if (columnCount != 5)
                 {
-                    delimiter = line.FindDelimiter(_delimiters);
-                    var headerCount = line.Split(delimiter).Length;
-                    if (headerCount != 5)
-                    {
-                        throw new InvalidDataException($"Expected 5 headers and found {headerCount}");
-                    }
+                    throw new InvalidDataException($"Expected 5 columns and found {columnCount}");
+                }
+
+                if (hasHeader && !hasReadHeader)
+                {
                     hasReadHeader = true;
                     continue;
                 }
@@ -53,6 +56,7 @@ namespace GrInterview.Common.Parsers
                 var person = new User(lastName, firstName, email, color, dateOfBirth);
                 records.Add(person);
             }
+
             return records;
         }
     }
