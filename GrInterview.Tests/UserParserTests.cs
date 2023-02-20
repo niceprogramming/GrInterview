@@ -14,16 +14,21 @@ namespace GrInterview.Tests
     
     public class UserParserTests
     {
-        [Fact]
-        public async Task Parser_returns_data_given_a_file_with_at_least_one_non_header_row()
+        [Theory]
+        [InlineData("./TestFiles/SingleLineCsv.txt")]
+        [InlineData("./TestFiles/SingleLinePipe.txt")]
+        [InlineData("./TestFiles/SingleLineSpaces.txt")]
+        [InlineData("./TestFiles/SingleLineCsvNoHeader.txt", false)]
+        [InlineData("./TestFiles/SingleLinePipeNoHeader.txt", false)]
+        [InlineData("./TestFiles/SingleLineSpacesNoHeader.txt", false)]
+        public async Task Parser_returns_data_given_a_file_with_delimiter_and_at_least_one_non_header_row(string filePath, bool hasHeader = true)
         {
-            var filePath = "./TestFiles/SingleLineCsv.txt";
             using var fileStream = File.OpenText(filePath);
 
             var expected = new User("User", "Test", "test.user@gmail.com", "brown", new DateTime(1994, 7, 26));
-            var parser = new UserParser(new []{","});
+            var parser = new UserParser(new[] { ",", "|", " " });
 
-            var result = await parser.Parse(fileStream);
+            var result = await parser.Parse(fileStream, hasHeader);
 
             Assert.Equivalent(expected, result.FirstOrDefault());
         }
@@ -41,25 +46,6 @@ namespace GrInterview.Tests
 
             Assert.Equivalent(expected, result.FirstOrDefault());
         }
-
-        [Theory]
-        [InlineData("./TestFiles/SingleLineCsv.txt")]
-        [InlineData("./TestFiles/SingleLinePipe.txt")]
-        [InlineData("./TestFiles/SingleLineSpaces.txt")]
-        public async Task Parser_works_with_different_delimiters(string filePath)
-        {
-            using var fileStream = File.OpenText(filePath);
-
-            var parser = new UserParser(new[] { ",", "|", " " });
-
-            var expected = new User("User", "Test", "test.user@gmail.com", "brown", new DateTime(1994, 7, 26));
-            
-
-            var result = await parser.Parse(fileStream);
-
-            Assert.Equivalent(expected, result.FirstOrDefault());
-        }
-
 
         [Theory]
         [InlineData("./TestFiles/FourHeaderCsv.txt")]
