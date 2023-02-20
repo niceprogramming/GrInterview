@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,15 +18,15 @@ namespace GrInterview.Common.Parsers
         {
             _delimiters = delimiters;
         }
-        public async Task<IEnumerable<User>> Parse(StreamReader reader)
+        public async Task<IEnumerable<User>> Parse(TextReader reader)
         {
             var hasReadHeader = false;
             var delimiter = string.Empty;
             var records = new List<User>();
-
-            while (!reader.EndOfStream)
+            string? line;
+            while ((line = await reader.ReadLineAsync()) != null)
             {
-                var line = await reader.ReadLineAsync();
+                
                 if (string.IsNullOrWhiteSpace(line))
                 {
                     continue;
