@@ -30,7 +30,7 @@ namespace GrInterview.Tests
 
             var result = await parser.Parse(fileStream, hasHeader);
 
-            Assert.Equivalent(expected, result.FirstOrDefault());
+            Assert.Equal(expected, result.FirstOrDefault());
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace GrInterview.Tests
 
             var result = await parser.Parse(fileStream);
 
-            Assert.Equivalent(expected, result.FirstOrDefault());
+            Assert.Equal(expected, result.FirstOrDefault());
         }
 
         [Theory]
