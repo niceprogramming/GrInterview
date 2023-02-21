@@ -1,7 +1,11 @@
+using GrInterview.Api.Db;
+using GrInterview.Common.Interfaces;
+using GrInterview.Common.Models;
+using GrInterview.Common.Parsers;
 
 namespace GrInterview.Api
 {
-    public class Program
+    public partial class Program
     {
         public static void Main(string[] args)
         {
@@ -9,13 +13,16 @@ namespace GrInterview.Api
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(x => x.JsonSerializerOptions.Converters.Add(new DateTimeConverter()));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddSingleton<IParser<User>>(new UserParser(new[] { ",", "|", " " }));
+            builder.Services.AddSingleton<IUserRepository, InMemoryUserRepository>();
             var app = builder.Build();
-
+            
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

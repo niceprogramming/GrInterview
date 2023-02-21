@@ -1,13 +1,17 @@
-﻿using System;
+﻿using GrInterview.Common.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GrInterview.Api;
 
 namespace GrInterview.Tests
 {
     internal static class TestData
     {
+        public static string SuccessfulPostJson = """{"lastName":"User","firstName":"Test","email":"test.user@gmail.com","favoriteColor":"brown","dateOfBirth":"7/26/1994"}""";
+
         public static string SuccessfulTestOutput => $@" ---------------------------------------------------------------------------- 
  | LastName | FirstName | Email               | FavoriteColor | DateOfBirth |
  ---------------------------------------------------------------------------- 
