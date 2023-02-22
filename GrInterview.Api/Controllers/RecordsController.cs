@@ -26,8 +26,8 @@ namespace GrInterview.Api.Controllers
         public async Task<ActionResult> Post([FromBody] DelimitedRecord record)
         {
             using var reader = new StringReader(record.Data!);
-            var userRecords = await _parser.Parse(reader, false);
-            _repository.AddUser(userRecords.FirstOrDefault());
+            var userRecords = (await _parser.Parse(reader, false)).ToList();
+            _repository.AddUser(userRecords.FirstOrDefault()!);
             return StatusCode(201, userRecords.FirstOrDefault());
         }
 
