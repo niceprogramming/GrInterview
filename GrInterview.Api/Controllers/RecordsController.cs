@@ -3,6 +3,8 @@ using GrInterview.Api.Models;
 using GrInterview.Common.Interfaces;
 using GrInterview.Common.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.NetworkInformation;
+using System.Reflection.PortableExecutable;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,10 +27,20 @@ namespace GrInterview.Api.Controllers
         [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
         public async Task<ActionResult> Post([FromBody] DelimitedRecord record)
         {
-            using var reader = new StringReader(record.Data!);
-            var userRecords = (await _parser.Parse(reader, false)).ToList();
-            _repository.AddUser(userRecords.FirstOrDefault()!);
-            return StatusCode(201, userRecords.FirstOrDefault());
+            try
+            {
+                using var reader = new StringReader(record.Data!);
+                var userRecords = (await _parser.Parse(reader, false)).ToList();
+                _repository.AddUser(userRecords.FirstOrDefault()!);
+                return StatusCode(201, userRecords.FirstOrDefault());
+            }
+            catch (InvalidDataException e)
+            {
+
+                return Problem(e.Message, title: "unable to parse supplied data", statusCode: 400);
+            }
+            
+         
         }
 
         [HttpGet("color")]

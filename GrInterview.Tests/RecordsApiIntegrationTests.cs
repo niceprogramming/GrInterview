@@ -59,6 +59,21 @@ namespace GrInterview.Tests
         }
 
         [Fact]
+        public async Task Posting_with_invalid_data_returns_400_with_errors()
+        {
+            var record = new DelimitedRecord
+            {
+                Data = "1,2,3,4"
+            };
+            var result = await _http.PostAsJsonAsync<DelimitedRecord>("/api/records", record);
+            var content = await result.Content.ReadAsStringAsync();
+
+            Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
+            Assert.Contains("Expected 5 columns", content);
+        }
+
+
+        [Fact]
         public async Task Posting_with_empty_body_returns_400_with_errors()
         {
             var result = await _http.PostAsJsonAsync<DelimitedRecord>("/api/records", null);
