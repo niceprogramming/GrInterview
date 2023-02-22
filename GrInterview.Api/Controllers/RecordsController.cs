@@ -22,6 +22,7 @@ namespace GrInterview.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(User), StatusCodes.Status201Created)]
         public async Task<ActionResult> Post([FromBody] DelimitedRecord record)
         {
             using var reader = new StringReader(record.Data!);
