@@ -22,7 +22,7 @@ namespace GrInterview.Common.Parsers
         public async Task<IEnumerable<User>> Parse(TextReader reader, bool hasHeader = true)
         {
             var hasReadHeader = false;
-            var delimiter = string.Empty;
+            string? delimiter = null;
             var records = new List<User>();
             while (await reader.ReadLineAsync() is { } line)
             {
@@ -31,13 +31,16 @@ namespace GrInterview.Common.Parsers
                     continue;
                 }
 
-
-                delimiter = line.FindDelimiter(_delimiters);
-                var columnCount = line.Split(delimiter).Length;
-                if (columnCount != 5)
+                if (delimiter == null)
                 {
-                    throw new InvalidDataException($"Expected 5 columns and found {columnCount}");
+                    delimiter = line.FindDelimiter(_delimiters);
+                    var columnCount = line.Split(delimiter).Length;
+                    if (columnCount != 5)
+                    {
+                        throw new InvalidDataException($"Expected 5 columns and found {columnCount}");
+                    }
                 }
+               
 
                 if (hasHeader && !hasReadHeader)
                 {
