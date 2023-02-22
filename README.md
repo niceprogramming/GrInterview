@@ -16,5 +16,11 @@ The file paths are accepted as input for the console application.
 
 API documentation can be viewed by running GrInterview.Api and navigation to `https://localhost:7132/swagger/index.html`
 
+Example /records payload
 
+```
+{
+    "data": "User,Test,test.user@gmail.com,brown,07/26/1994"
+}
+```
 

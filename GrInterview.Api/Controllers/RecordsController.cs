@@ -10,7 +10,7 @@ using System.Reflection.PortableExecutable;
 
 namespace GrInterview.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class RecordsController : ControllerBase
     {

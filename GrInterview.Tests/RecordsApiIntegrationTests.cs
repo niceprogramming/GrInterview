@@ -50,7 +50,7 @@ namespace GrInterview.Tests
                 {
                     Data = line
                 };
-                var result = await _http.PostAsJsonAsync("/api/records", record);
+                var result = await _http.PostAsJsonAsync("/records", record);
                 Assert.Equal(HttpStatusCode.Created, result.StatusCode);
             }
 
@@ -65,7 +65,7 @@ namespace GrInterview.Tests
             {
                 Data = "1,2,3,4"
             };
-            var result = await _http.PostAsJsonAsync<DelimitedRecord>("/api/records", record);
+            var result = await _http.PostAsJsonAsync<DelimitedRecord>("/records", record);
             var content = await result.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
@@ -76,7 +76,7 @@ namespace GrInterview.Tests
         [Fact]
         public async Task Posting_with_empty_body_returns_400_with_errors()
         {
-            var result = await _http.PostAsJsonAsync<DelimitedRecord>("/api/records", null);
+            var result = await _http.PostAsJsonAsync<DelimitedRecord>("/records", null);
             var content = await result.Content.ReadAsStringAsync();
 
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
@@ -86,7 +86,7 @@ namespace GrInterview.Tests
         [Fact]
         public async Task Posting_with_empty_record_returns_400_with_errors()
         {
-            var result = await _http.PostAsJsonAsync("/api/records", new DelimitedRecord());
+            var result = await _http.PostAsJsonAsync("/records", new DelimitedRecord());
             var content = await result.Content.ReadAsStringAsync();
             
             Assert.Equal(HttpStatusCode.BadRequest, result.StatusCode);
@@ -108,9 +108,9 @@ namespace GrInterview.Tests
         public static IEnumerable<object[]> SortingData =>
             new List<object[]>
             {
-                new object[] { "/api/records/color", ColorSorter },
-                new object[] { "/api/records/birthdate", BirthSorter },
-                new object[] { "/api/records/name", NameSorter },
+                new object[] { "/records/color", ColorSorter },
+                new object[] { "/records/birthdate", BirthSorter },
+                new object[] { "/records/name", NameSorter },
 
             };
 
